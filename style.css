@@ -1,0 +1,329 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f2fb;
+  color: #1f1b2e;
+}
+
+/* Lateral + chat, uno al lado del otro */
+.pagina {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* ---------- Lateral con las solapas ---------- */
+.lateral {
+  width: 250px;
+  flex-shrink: 0;
+  height: 88vh;
+  min-height: 460px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(109, 40, 217, 0.15);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lateral-titulo { font-weight: bold; font-size: 16px; color: #4c1d95; }
+
+.nueva {
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  border: 2px dashed #6d28d9;
+  background: #ffffff;
+  color: #6d28d9;
+  border-radius: 10px;
+  padding: 9px;
+}
+.nueva:hover { background: #f4f2fb; }
+
+.solapas {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.solapa {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background: #f4f2fb;
+  cursor: pointer;
+}
+.solapa:hover { background: #ede9fe; }
+.solapa.activa { background: #ede9fe; border-color: #6d28d9; }
+
+.solapa .icono { font-size: 20px; }
+.solapa .textos { flex: 1; min-width: 0; }
+
+.solapa .titulo-solapa {
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.solapa .detalle { font-size: 12px; color: #6b6385; }
+
+.solapa .borrar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9b94b5;
+  font-size: 16px;
+}
+.solapa .borrar:hover { color: #b91c1c; }
+
+.aviso-guardado { margin: 0; font-size: 12px; color: #b91c1c; }
+
+/* ---------- Ventana de chat ---------- */
+.ventana {
+  flex: 1;
+  min-width: 0;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(109, 40, 217, 0.15);
+  display: flex;
+  flex-direction: column;
+  height: 88vh;
+  min-height: 460px;
+  overflow: hidden;
+}
+
+.encabezado {
+  background: #6d28d9;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.nombre { font-weight: bold; font-size: 18px; }
+.estado { font-size: 13px; opacity: 0.9; }
+.estado::before { content: "● "; color: #86efac; }
+
+/* ---------- Mensajes ---------- */
+.mensajes {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #faf9ff;
+}
+
+.burbuja {
+  max-width: 82%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.burbuja.bot {
+  align-self: flex-start;
+  background: #ede9fe;
+  border-bottom-left-radius: 4px;
+}
+
+.burbuja.usuario {
+  align-self: flex-end;
+  background: #6d28d9;
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+}
+
+/* Animación de "escribiendo..." */
+.escribiendo span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 2px;
+  border-radius: 50%;
+  background: #6d28d9;
+  animation: saltito 1s infinite;
+}
+.escribiendo span:nth-child(2) { animation-delay: 0.15s; }
+.escribiendo span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes saltito {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+/* ---------- Zona de respuestas ---------- */
+.respuestas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 14px;
+  border-top: 1px solid #e5e1f5;
+  max-height: 45%;
+  overflow-y: auto;
+}
+.respuestas:empty { display: none; }
+
+.opcion, .chip, .enviar, .boton {
+  font-family: inherit;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.opcion {
+  border: 2px solid #6d28d9;
+  background: #ffffff;
+  color: #6d28d9;
+  padding: 10px 14px;
+  border-radius: 999px;
+}
+.opcion:hover { background: #6d28d9; color: #ffffff; }
+
+.chip {
+  border: 1px dashed #6d28d9;
+  background: #f4f2fb;
+  color: #4c1d95;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; }
+.entrada { display: flex; gap: 8px; width: 100%; }
+
+.entrada input {
+  flex: 1;
+  min-width: 0;
+  font-size: 16px;
+  padding: 10px 12px;
+  border: 2px solid #c4b5fd;
+  border-radius: 10px;
+}
+.entrada input:focus { outline: none; border-color: #6d28d9; }
+
+.enviar {
+  background: #6d28d9;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+}
+
+.aviso { width: 100%; margin: 0; font-size: 13px; color: #b91c1c; }
+
+/* ---------- Tarjeta del prompt final ---------- */
+.tarjeta {
+  align-self: stretch;
+  background: #ffffff;
+  border: 2px solid #6d28d9;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.tarjeta textarea {
+  width: 100%;
+  font-family: Consolas, monospace;
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid #c4b5fd;
+  border-radius: 8px;
+  resize: vertical;
+}
+
+.botones { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+
+.boton {
+  background: #6d28d9;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+.boton.claro { background: #ede9fe; color: #4c1d95; }
+
+.recordatorio { margin: 10px 0 0; font-size: 14px; color: #4c1d95; }
+.recordatorio.aclaracion-iteracion {
+  background: #f5f3ff;
+  border-left: 3px solid #6d28d9;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #3b0764;
+  line-height: 1.45;
+}
+
+/* ---------- Botón volver ---------- */
+.barra { padding: 6px 14px 10px; border-top: 1px solid #e5e1f5; }
+
+.volver {
+  background: none;
+  border: none;
+  color: #6d28d9;
+  font-size: 14px;
+  cursor: pointer;
+}
+.volver:disabled { color: #b8b3c9; cursor: default; }
+
+/* ---------- Celular: las solapas pasan arriba, en fila ---------- */
+@media (max-width: 760px) {
+  .pagina { flex-direction: column; }
+
+  .lateral { width: 100%; height: auto; min-height: 0; }
+
+  .solapas {
+    flex: none;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .solapa { min-width: 190px; flex-shrink: 0; }
+
+  .ventana { width: 100%; height: 80vh; }
+}
+
+/* ---------- Animaciones suaves (estilo Apple) ---------- */
+.burbuja.nueva { animation: aparecer 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Al limpiar la pantalla, el chat se desvanece y se desenfoca */
+.mensajes.desvanece {
+  opacity: 0;
+  filter: blur(6px);
+  transform: scale(0.98);
+  transition: opacity 0.45s ease, filter 0.45s ease, transform 0.45s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burbuja.nueva { animation: none; }
+  .mensajes.desvanece { transition: none; filter: none; transform: none; }
+}

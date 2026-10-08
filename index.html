@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Promptín</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="pagina">
+
+    <!-- Solapas con las conversaciones guardadas -->
+    <aside class="lateral">
+      <div class="lateral-titulo">💬 Conversaciones</div>
+      <button class="nueva" id="botonNueva">➕ Nueva conversación</button>
+      <div class="solapas" id="solapas"></div>
+      <p class="aviso-guardado" id="avisoGuardado" hidden>⚠️ Este navegador no deja guardar: las conversaciones se pierden al cerrar la página.</p>
+    </aside>
+
+    <!-- La ventana de chat -->
+    <section class="ventana">
+      <header class="encabezado">
+        <div class="avatar">🧠</div>
+        <div>
+          <div class="nombre" id="nombreBot">Promptín</div>
+          <div class="estado">en línea</div>
+        </div>
+      </header>
+
+      <div class="mensajes" id="mensajes"></div>
+      <div class="respuestas" id="respuestas"></div>
+
+      <div class="barra">
+        <button class="volver" id="botonVolver">↩ Volver</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
